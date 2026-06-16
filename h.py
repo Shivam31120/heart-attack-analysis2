@@ -298,9 +298,9 @@ with tab3:
 # TAB 4 — RISK PREDICTOR
 # ════════════════════════════════════════════════════════════════════════════
 with tab4:
-    st.header("🩺 Real-Time Risk Predictor")
+    st.header(" Real-Time Risk Predictor")
     st.caption("Inputs are fed directly into the trained Random Forest model.")
-    st.warning("⚠️ For educational purposes only — not a medical diagnosis.")
+    st.warning(" For educational purposes only — not a medical diagnosis.")
 
     with st.form("predict_form"):
         c1, c2, c3 = st.columns(3)

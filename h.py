@@ -11,7 +11,6 @@ from sklearn.metrics import (accuracy_score, roc_auc_score, confusion_matrix, cl
 # ── PAGE CONFIG ──────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="CardioScope — Heart Disease Predictor",
-    page_icon="🫀",
     layout="wide",
 )
 
@@ -32,10 +31,11 @@ st.markdown("""
 
 # ── LOAD & TRAIN ─────────────────────────────────────────────────────────────
 @st.cache_data
-def load_and_train(path):
-    df = pd.read_csv(path)
-    X  = df.drop("target", axis=1)
-    y  = df["target"]
+def load_and_train():
+    df = pd.read_csv("heart_statlog_cleveland_hungary_final.csv")
+
+    X = df.drop("target", axis=1)
+    y = df["target"]
 
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
@@ -57,25 +57,22 @@ def load_and_train(path):
 
 # ── SIDEBAR — FILE UPLOAD ─────────────────────────────────────────────────────
 with st.sidebar:
-    st.title("🫀 CardioScope")
+    st.title(" CardioScope")
     st.markdown("---")
-    uploaded = st.file_uploader("Upload your CSV", type=["csv"])
+    st.caption("Dataset loaded automatically")
     st.markdown("---")
     st.caption("Random Forest · scikit-learn · Streamlit")
 
-if uploaded is None:
-    st.title("🫀 CardioScope — Heart Disease Predictor")
-    st.info("👈 Upload **heart_statlog_cleveland_hungary_final.csv** from the sidebar to get started.")
-    st.stop()
 
-df, model, feature_cols, metrics = load_and_train(uploaded)
+
+df, model, feature_cols, metrics = load_and_train()
 
 # ── TABS ─────────────────────────────────────────────────────────────────────
 tab1, tab2, tab3, tab4 = st.tabs([
-    "📊 Model Performance",
-    "🔍 Feature Importance",
-    "📈 Data Insights",
-    "🩺 Risk Predictor",
+    " Model Performance",
+    " Feature Importance",
+    " Data Insights",
+    " Risk Predictor",
 ])
 
 # ════════════════════════════════════════════════════════════════════════════
